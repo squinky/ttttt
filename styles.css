@@ -1,4 +1,5 @@
-.continue
-{
-	cursor: pointer;
+body {
+	background: #000;
+	color: #999;
+	margin: 0;
 }
