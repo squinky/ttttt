@@ -111,11 +111,11 @@ function tick()
 			started = true;
 		}
 	}
-	if (idling && pauseTime <= 0)
+	else if (idling && pauseTime <= 0)
 	{
 		pauseTime = createjs.Sound.play("intro").duration;
 	}
-	if (!idling)
+	else if (!idling)
 	{
 		timeSinceObjectTouched += timeSinceLastTick;
 		if (timeSinceObjectTouched > 180000) idling = true;
