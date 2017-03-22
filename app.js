@@ -9,6 +9,7 @@ var HEART = 39;		// right arrow
 var TEETH = 40;		// down arrow
 
 var objectsBeingTouched = [];
+var currentSound;
 
 function init()
 {
@@ -20,10 +21,10 @@ function init()
 
 function keydown(event)
 {
-	if (!objectsBeingTouched[event.keyCode])
+	if (!objectsBeingTouched[event.keyCode] && (!currentSound || currentSound.position == 0))
 	{
     	objectsBeingTouched[event.keyCode] = true;
-    	createjs.Sound.play("testsound");
+    	currentSound = createjs.Sound.play("testsound");
     }
 }
 
