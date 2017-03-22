@@ -14,6 +14,7 @@ var sounds = [];
 
 var lastTickTime = 0;
 var pauseTime = 0;
+var startDelay = 0;
 var started = false;
 var idling = true;
 var timeSinceObjectTouched = 0;
@@ -103,8 +104,12 @@ function tick()
 
 	if (!started)
 	{
-		pauseTime = createjs.Sound.play("reset").duration;
-		started = true;
+		startDelay += timeSinceLastTick;
+		if (startDelay >= 2000)
+		{
+			pauseTime = createjs.Sound.play("reset").duration;
+			started = true;
+		}
 	}
 	if (idling && pauseTime <= 0)
 	{
