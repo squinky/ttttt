@@ -14,10 +14,9 @@ var sounds = [];
 
 var lastTickTime = 0;
 var pauseTime = 0;
-var startDelay = 0;
-var started = false;
 var idling = true;
 var timeSinceObjectTouched = 0;
+var shuttingDown = false;
 
 function init()
 {
@@ -71,7 +70,8 @@ function keydown(event)
 {
 	if (event.keyCode == RESET)
 	{
-		location.reload();
+		pauseTime = createjs.Sound.play("reset").duration;
+		shuttingDown = true;
 	}
 	else if (!objectsBeingTouched[event.keyCode])
 	{
@@ -102,20 +102,15 @@ function tick()
 	var timeSinceLastTick = createjs.Ticker.getTime() - lastTickTime;
 	lastTickTime = createjs.Ticker.getTime();
 
-	if (!started)
+	if (shuttingDown && pauseTime <= 0)
 	{
-		startDelay += timeSinceLastTick;
-		if (startDelay >= 10000)
-		{
-			pauseTime = createjs.Sound.play("reset").duration;
-			started = true;
-		}
+		location.reload();
 	}
-	else if (idling && pauseTime <= 0)
+	if (idling && pauseTime <= 0)
 	{
 		pauseTime = createjs.Sound.play("intro").duration;
 	}
-	else if (!idling)
+	if (!idling)
 	{
 		timeSinceObjectTouched += timeSinceLastTick;
 		if (timeSinceObjectTouched > 180000) idling = true;
