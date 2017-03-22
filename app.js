@@ -105,7 +105,7 @@ function tick()
 	if (!started)
 	{
 		startDelay += timeSinceLastTick;
-		if (startDelay >= 2000)
+		if (startDelay >= 10000)
 		{
 			pauseTime = createjs.Sound.play("reset").duration;
 			started = true;
