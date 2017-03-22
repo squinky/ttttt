@@ -70,6 +70,7 @@ function keydown(event)
 {
 	if (event.keyCode == RESET)
 	{
+		createjs.Sound.stop();
 		pauseTime = createjs.Sound.play("reset").duration;
 		shuttingDown = true;
 	}
